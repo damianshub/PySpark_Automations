@@ -1,5 +1,8 @@
-PySpark Smart Schema Automation
-Smart Schema Automation 
+# PySpark Smart Schema Automation
+
+Automatically infers and recommends Spark schemas for CSV and JSON datasets with column-level confidence metrics. Ideal for data engineers and analysts who want fast, reliable schema generation.
+
+---
 
 Lightweight PySpark utility that automatically infers and recommends an optimal Spark schema for CSV or JSON datasets based on a configurable sample size.
 It analyzes data types and field patterns, then outputs a recommended schema along with column-level correlation and confidence metrics to help you validate inference accuracy.
