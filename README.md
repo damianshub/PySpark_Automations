@@ -19,3 +19,4 @@ Use Case
 
 Ideal for data engineers and analysts who need a fast, automated way to generate reliable Spark schemas without manually inspecting data samples.
 
+
