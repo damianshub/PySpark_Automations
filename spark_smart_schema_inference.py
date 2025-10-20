@@ -8,11 +8,19 @@ spark = SparkSession.builder.appName("SmartSchemaInference").getOrCreate()
 
 # --- User settings ---
 file_path = '/kaggle/input/covid19-tweets-morning-27032020/all_location_tweets.json'   # CSV or JSON path
+sample_size = 5000  # number of rows to sample
 
-# Pick: JSON or CSV file type
-# file_type = "csv"                    # choose "csv"
-file_type = "json"                    # choose "json"
-sample_size = 5000                   # number of rows to sample
+# --- Automatically detect file type based on extension ---
+ext = os.path.splitext(file_path)[1].lower()
+if ext == '.csv':
+    file_type = 'csv'
+elif ext == '.json':
+    file_type = 'json'
+else:
+    raise ValueError(f"Unsupported file extension: {ext}. Please use .csv or .json.")
+
+print(f"Detected file type: {file_type}")
+
 
 # --------------------------
 def infer_type(values):
@@ -115,18 +123,10 @@ def recommend_schema(file_path, file_type="csv", sample_size=1000):
     return struct
 
 
-# # --- Run schema recommendation ---
-# schema = recommend_schema(file_path, file_type=file_type, sample_size=sample_size)
-
-# # Example usage:
-# # df = spark.read.schema(schema).csv(file_path)   # for CSV
-# # df = spark.read.schema(schema).json(file_path)  # for JSON
-
-
-# Run schema recommendation
+# --- Run schema recommendation ---
 schema = recommend_schema(file_path, file_type=file_type, sample_size=sample_size)
 
-# Automatically read the file with the inferred schema
+# --- Automatically read the file with inferred schema ---
 if file_type.lower() == "csv":
     df = spark.read.schema(schema).option("header", True).csv(file_path)
 elif file_type.lower() == "json":
@@ -134,7 +134,5 @@ elif file_type.lower() == "json":
 else:
     raise ValueError("file_type must be 'csv' or 'json'")
 
-# Show a sample of the dataframe
+# --- Show a sample of the dataframe ---
 df.show(5, truncate=False)
-
-
