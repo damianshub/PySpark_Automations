@@ -4,9 +4,6 @@ import re
 import os
 from decimal import Decimal, InvalidOperation
 
-# my comments
-
-
 spark = SparkSession.builder.appName("SmartSchemaInferenceWithConfidence").getOrCreate()
 
 # --- User settings ---
