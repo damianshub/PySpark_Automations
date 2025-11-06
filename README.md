@@ -16,7 +16,7 @@ Key Features
 
 
 Use Case
-
 Ideal for data engineers and analysts who need a fast, automated way to generate reliable Spark schemas without manually inspecting data samples.
 
 
+## Developed with assistance from AI (GPT-5) and thoroughly tested by a human. ##
